@@ -164,6 +164,11 @@ pub mod coord {
         }
     }
 
+    pub fn coord_iter<T>(x: &Vec<Vec<T>>) -> impl Iterator<Item = Coord> + '_ {
+        let x = (0..x.len()).flat_map(|r| (0..x[0].len()).map(move |c| Coord::new_u(c, r)));
+        return x;
+    }
+
     pub struct Bitmask {
         masks: Vec<u64>
     }
