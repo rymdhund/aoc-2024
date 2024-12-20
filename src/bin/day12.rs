@@ -68,10 +68,7 @@ fn solve2(inp: &Vec<Vec<char>>) -> usize {
                 }
             }
         }
-        let s = sides(&seen);
-        let a = seen.len();
-        //println!("{s} * {a}");
-        acc += s * a;
+        acc += sides(&seen) * seen.len();
     });
     acc
 }
@@ -95,16 +92,13 @@ fn sides(shape: &HashSet<Coord>) -> usize {
                 (false, true) => Some(Dir::Right),
                 _ => None,
             };
-            if border_dir.is_some() {
-                if border_dir != prev_border_dir {
-                    cnt += 1
-                }
+            if border_dir != prev_border_dir {
+                cnt += 1
             }
             prev_border_dir = border_dir;
         }
     }
     for y in miny..maxy {
-        //let mut on_border = false;
         let mut prev_border_dir = None;
         for x in minx..maxx {
             let p = Coord::new(x, y);
@@ -114,10 +108,8 @@ fn sides(shape: &HashSet<Coord>) -> usize {
                 (false, true) => Some(Dir::Down),
                 _ => None,
             };
-            if border_dir.is_some() {
-                if border_dir != prev_border_dir {
-                    cnt += 1
-                }
+            if border_dir != prev_border_dir {
+                cnt += 1
             }
             prev_border_dir = border_dir;
         }
