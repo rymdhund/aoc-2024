@@ -1,5 +1,6 @@
 pub mod coord {
     use std::ops::{Add, Sub, Mul};
+    use std::slice::Iter;
 
     use itertools::Itertools;
 
@@ -109,6 +110,11 @@ pub mod coord {
             }
         }
 
+        pub fn iter() -> Iter<'static, Dir> {
+            static DIRECTIONS: [Dir; 4] = [Dir::Right, Dir::Down, Dir::Left, Dir::Up];
+            DIRECTIONS.iter()
+        }
+
         pub fn id(self) -> usize {
             match self {
                 Dir::Right => 0,
@@ -125,6 +131,7 @@ pub mod coord {
         pub fn turn_right(self) -> Dir {
             Self::of_id((self.id() + 1) % 4)
         }
+
     }
 
     pub trait CoordMap<T: Copy> {
